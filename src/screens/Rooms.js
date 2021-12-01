@@ -1,79 +1,85 @@
-import React, {useReducer, useState} from "react";
-import {View, Text, StyleSheet,TouchableOpacity} from 'react-native';
-
-//Variables
-const ROOM_SCREEN_STATE = "roomScreens";
-const FILTER_SCREEN_STATE = "filterScreens";
+import React, {useContext} from 'react';
+import {StyleSheet, View, Text, Button, FlatList, TouchableOpacity} from 'react-native';
+import {Context} from "../context/RoomContext";
 
 
-const reducer = (stats, action) =>
+const Room = (props) =>
 {
-    switch(actions.statsToChange)
-    {
-            //cases go here
-    }
-}
-
-const Rooms = () =>
-{
-    //keep tract of what screen we are in
-
-    const [roomState, setRoomState] = useState(ROOM_SCREEN_STATE);
-    var whatToDisplay; //use to fill up JSX
+    const {addRooms,state} = useContext(Context);
+    var roomList = [ 188, 140, 121, 132];
 
 
-    switch(roomState)
-    {
-        case ROOM_SCREEN_STATE:
-            
-        whatToDisplay = <View>
-            
-            <Text>Room Screen</Text>
-
-            <TouchableOpacity style={styles.buttonContainer} onPress={function(){setRoomState(FILTER_SCREEN_STATE)}}>
-                <Text style = {styles.nextPage}>Go to Filter Screen</Text>
-            
-          </TouchableOpacity> 
-
-        </View>// end of View
-        break;
-
+    return <View>
+        <Text style={styles.roomText}> Room</Text>
         
-        case FILTER_SCREEN_STATE:
-            whatToDisplay = <View>
 
-                <Text>Filter Screen</Text>
+        <TouchableOpacity onPress={() =>
+            {
+                if(state.length == 0)
+                {
+                    for (let i = 0; i < roomList.length; i++)
+                    {
+                        addRooms(roomList[i]);
+                
+                    }
+                }
+            }
+        }>
+            <Text style={styles.roomHeading}>View Rooms!</Text>
+        </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonContainer} onPress={function(){setRoomState(ROOM_SCREEN_STATE)}}>
-                <Text style = {styles.nextPage}>Go to Room Screen</Text>
+        <View style = {styles.roomContainer}>
+            <FlatList
+                data = {state}
+                keyExtractor={(room) => {return room.id}}
+                renderItem={({item}) =>
+                {
+                    return <TouchableOpacity style={styles.roomButton} onPress = { () => {props.navigation.navigate("RoomDetails", {id: item.id})}}>
+                        
+                        
+                        <Text style= {styles.roomText}> Room Number:{item.roomNum} </Text>
+                    
+                    
+                    </TouchableOpacity>
+                }} 
+
+                
             
-          </TouchableOpacity> 
+            />
+    </View>
+    
+    </View>
 
-            </View>// end of View
-        
-        break;
-
-
-    }
-
-    //returns what we want to display base on state
-    return whatToDisplay;
+    
 }
 
 const styles = StyleSheet.create
 ({
-    buttonContainer:{
-        backgroundColor: "#009688",
-        padding: 16,
+    roomHeading:
+    {
+        alignSelf: 'center',
+        borderWidth:3,
+        padding:20,
         borderRadius: 10,
-      },
-    
-    nextPage:{
-        fontSize: 20,
-        textAlign: 'center',
+        color: '#FFFFFF',
+        backgroundColor: '#0DA2FF',
+
     },
+    roomText:
+    {
+        alignSelf: 'center',
+        fontSize: 30,
+    },
+    roomButton:
+    {
+        marginVertical: 8,
+        marginHorizontal: 30,
+        padding: 20, 
+        borderWidth: 3,
+        alignContent: "space-around",
+    },
+    
+})
 
-});
-
-export default Rooms;
+export default Room;
 
