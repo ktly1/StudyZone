@@ -6,7 +6,14 @@ import {Context} from "../context/RoomContext";
 const Room = (props) =>
 {
     const {addRooms,state} = useContext(Context);
-    var roomList = [ 188, 140, 121, 132];
+    var roomList = [ 
+        {roomNum: 188}, 
+        {roomNum:140}, 
+        {roomNum:121}, 
+        {roomNum:132}
+    
+    
+    ];
 
 
     return <View>
@@ -19,7 +26,7 @@ const Room = (props) =>
                 {
                     for (let i = 0; i < roomList.length; i++)
                     {
-                        addRooms(roomList[i]);
+                        addRooms(roomList[i].roomNum);
                 
                     }
                 }
