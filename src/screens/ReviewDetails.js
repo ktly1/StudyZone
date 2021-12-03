@@ -1,14 +1,14 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native'
-import {Context} from "../context/RoomContext";
+import {Context } from "../context/RoomContext";
 
 
 const ReviewDetails = (props)  =>
 {
-   const{state} = useContext(Context);
+   const{rev} = useContext(Context);
 
    const reviewID = props.navigation.getParam("id");
-   const reviewPost = state.find((reviewPost) =>
+   const reviewPost = rev.find((reviewPost) =>
    {
        return reviewID === reviewPost.id;
    })

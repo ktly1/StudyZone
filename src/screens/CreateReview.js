@@ -1,13 +1,13 @@
 import React, {useState,useContext} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {Context} from "../context/RoomContext";
+import {Context } from "../context/RoomContext";
 
 
 const CreateReview = (props)  =>
 {
     const [title, setTitle] = useState("");
-    const [room, setRoom] = useState("");
+    const [review, setRoom] = useState("");
     const [content, setContent] = useState("");
 
     const {addReviewPost} = useContext(Context);
@@ -17,7 +17,7 @@ const CreateReview = (props)  =>
         <TextInput style={styles.input} value ={title} onChangeText={(text) => setTitle(text)}/>
 
         <Text style={styles.label}>Enter Room You Like to Review and Topic!</Text>
-         <TextInput style={styles.input}   value ={room} onChangeText={(text) => setRoom(text)}/>
+         <TextInput style={styles.input}   value ={review} onChangeText={(text) => setRoom(text)}/>
 
         <Text style={styles.label}>Enter Your Review!</Text>
         <TextInput style={styles.input}   value ={content} onChangeText={(text) => setContent(text)}/>
@@ -25,7 +25,7 @@ const CreateReview = (props)  =>
 
         <TouchableOpacity onPress ={() =>
         {
-            addReviewPost(title, room, content);
+            addReviewPost(title, review, content);
             props.navigation.navigate("ReviewList");
             
         }}>

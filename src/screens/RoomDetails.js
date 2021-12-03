@@ -48,7 +48,6 @@ const styles = StyleSheet.create
         alignContent: "space-around",
         alignSelf:'center',
     }
-    
 })
 
 export default RoomDetails;

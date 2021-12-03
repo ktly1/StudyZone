@@ -23,23 +23,31 @@ const roomReducer = (state, action) => {
                 
             })
 
-         case 'add_review':
-            return [...state, { 
-                    id: Math.floor(Math.random() * 999999), 
-                    title: action.payload.title,
-                    room: action.payload.room,
-                    content: action.payload.content,
-                }
-            ]
-        case 'delete_review':
-            return state.filter((reviewPost) =>
-            {
-                return reviewPost.id !== action.payload
-            });
         default:
             return state;
     }
 }
+
+const reviewReducer =(rev, action) => {
+    switch(action.type){
+        
+         case 'add_review':
+            return [...rev, { 
+                    title: action.payload.title,
+                    review: action.payload.review,
+                    content: action.payload.content,
+                }
+            ]
+        case 'delete_review':
+            return rev.filter((reviewPost) =>
+            {
+                return reviewPost.id !== action.payload
+            });
+        default:
+            return rev;
+    }
+}
+
 
 const getRooms= dispatch => {
     return async () => {
@@ -77,7 +85,7 @@ const addReviewPost = (dispatch) =>
     return (title, room, content) =>
     {
     
-            dispatch({ type:'add_review', payload:{title: title,  room: room, content: content}});
+            dispatch({ type:'add_review', payload:{title: title,  review: review, content: content}});
         
     }
 }
@@ -102,7 +110,7 @@ const updateRoom= (dispatch) => {
 
 }
 
-export const {Context, Provider} = createDataContext(roomReducer, 
+export const {Context, Provider} = createDataContext(roomReducer, reviewReducer,
                                     {addRooms, addReviewPost:addReviewPost, deleteReviewPost:deleteReviewPost}, 
                                     [ ]
                                 );

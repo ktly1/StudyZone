@@ -7,7 +7,7 @@ import {Feather} from '@expo/vector-icons'
 const ReviewList = (props) =>
 {
 
-    const {state, deleteReviewPost} = useContext(RoomContext)
+    const {rev, deleteReviewPost} = useContext(RoomContext)
 
     return <View>
 
@@ -16,7 +16,7 @@ const ReviewList = (props) =>
 
         
         <FlatList
-            data = {state}
+            data = {rev}
             keyExtractor = {(reviewPost) => {return reviewPost.title}}
             renderItem={({item}) =>
         {
@@ -66,9 +66,7 @@ ReviewList.navigationOptions = (props) =>
 const styles = StyleSheet.create({
     heading:
     {
-        alignSelf: 'center',
-        fontSize: 50,
-
+        alignSelf
     },
     row:
     {
