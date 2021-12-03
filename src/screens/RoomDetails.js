@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { set } from 'react-native-reanimated';
 import {Context} from "../context/RoomContext";
 
@@ -23,7 +24,9 @@ const RoomDetails = (props) =>
             </View>
 
 
-            
+            <TouchableOpacity style={styles.reviewButton} onPress = {() => props.navigation.navigate("ReviewList")}>
+                <Text> Click here to make or look at Reviews!</Text>
+            </TouchableOpacity>
         </View>
     
 }
@@ -36,6 +39,15 @@ const styles = StyleSheet.create
         marginVertical: 50,
         fontSize: 30,
     },
+    reviewButton:
+    {
+        marginVertical: 8,
+        marginHorizontal: 30,
+        padding: 20, 
+        borderWidth: 3,
+        alignContent: "space-around",
+        alignSelf:'center',
+    }
     
 })
 

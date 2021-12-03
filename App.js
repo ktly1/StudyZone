@@ -3,9 +3,10 @@ import { createStackNavigator } from "react-navigation-stack";
 import React from "react";
 import HomeScreen from "./src/screens/HomeScreen";
 import Rooms from "./src/screens/Rooms";
-import RoomDetails from "./src/screens/RoomDetails"
-import ReviewList from "./src/screens/ReviewList"
-import ReviewDetails from "./src/screens/ReviewDetails"
+import RoomDetails from "./src/screens/RoomDetails";
+import ReviewList from "./src/screens/ReviewList";
+import ReviewDetails from "./src/screens/ReviewDetails";
+import CreateReview from "./src/screens/CreateReview";
 import {Provider as RoomProvider } from "./src/context/RoomContext";
 
 
@@ -16,14 +17,15 @@ const navigator = createStackNavigator(
     RoomDetails: RoomDetails,
     ReviewList: ReviewList,
     ReviewDetails: ReviewDetails,
+    CreateReview: CreateReview,
 
   },
 
   {
-    initialRouteName: "ReviewList",
+    initialRouteName: "Rooms",
     defaultNavigationOptions:
     {
-      title: "StudyZone Home"
+      title: "StudyZone"
     }
   }
 );
