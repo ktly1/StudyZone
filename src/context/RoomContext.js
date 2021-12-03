@@ -9,6 +9,7 @@ const roomReducer = (state, action) => {
             return [...state, { 
                     id: Math.floor(Math.random() * 999999), 
                     roomNum: action.payload.roomNum,
+                    hasComputers: action.payload.hasComputers,
                 }
             ]
         case 'update_room':
@@ -19,6 +20,20 @@ const roomReducer = (state, action) => {
                 else{
                     return room;
                 }
+                
+            })
+
+         case 'add_review':
+            return [...state, { 
+                    id: Math.floor(Math.random() * 999999), 
+                    title: `Review Post #${state.length +1}`,
+                }
+            ]
+
+        case 'delete__review':
+            return state.filter((reviewPost) =>
+            {
+                return reviewPost.id !== action.payload
             })
         default:
             return state;
@@ -43,10 +58,10 @@ const getRooms= dispatch => {
 }
 
 const addRooms = (dispatch) => {
-    return (roomNum) => {
+    return (roomNum, hasComputers) => {
         
         
-        dispatch({ type: 'add_room', payload: { roomNum: roomNum } })
+        dispatch({ type: 'add_room', payload: { roomNum: roomNum, hasComputers: hasComputers} })
        /*
         if(callback)
         {
@@ -56,13 +71,20 @@ const addRooms = (dispatch) => {
     }
 }
 
-const deleteHero = (dispatch) => {
-    
-    return (id) =>
+const addReviewPost = (dispatch) =>
+{
+    return () =>
     {
-        dispatch({ type: 'delete_hero', payload: id  })
+        dispatch({ type:'add_review'})
     }
-    
+}
+
+const deleteReviewPost = (dispatch) =>
+{
+    return () =>
+    {
+        dispatch({type: 'delete_review', payload: id})
+    }
 }
 
 const updateRoom= (dispatch) => {
@@ -78,6 +100,6 @@ const updateRoom= (dispatch) => {
 }
 
 export const {Context, Provider} = createDataContext(roomReducer, 
-                                    {addRooms}, 
+                                    {addRooms, addReviewPost, deleteReviewPost}, 
                                     [ ]
                                 );

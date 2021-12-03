@@ -7,10 +7,10 @@ const Room = (props) =>
 {
     const {addRooms,state} = useContext(Context);
     var roomList = [ 
-        {roomNum: 188}, 
-        {roomNum:140}, 
-        {roomNum:121}, 
-        {roomNum:132}
+        {roomNum: 188, hasComputers:'N'}, 
+        {roomNum:140 , hasComputers:'Y'}, 
+        {roomNum:121, hasComputers:'N'}, 
+        {roomNum:132, hasComputers:'Y'}
     
     
     ];
@@ -26,7 +26,7 @@ const Room = (props) =>
                 {
                     for (let i = 0; i < roomList.length; i++)
                     {
-                        addRooms(roomList[i].roomNum);
+                        addRooms(roomList[i].roomNum, roomList[i].hasComputers);
                 
                     }
                 }
@@ -45,6 +45,7 @@ const Room = (props) =>
                         
                         
                         <Text style= {styles.roomText}> Room Number:{item.roomNum} </Text>
+                        <Text style={styles.miniDescript}> Computer Available: {item.hasComputers} </Text>
                     
                     
                     </TouchableOpacity>
