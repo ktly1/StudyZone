@@ -4,32 +4,19 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Context } from "../context/ReviewContext";
 
 
-const CreateReview = (props)  =>
-{
+const ReviewEditScreen = (props)  => {
+
     const [title, setTitle] = useState("");
     const [review, setReview] = useState("");
 
 
     const roomNum = props.navigation.getParam("room");
-    
 
-    const {addReview,state} = useContext(Context);
+    const {editReview,state} = useContext(Context);
 
     return <View>
-        <Text style={styles.label}>Enter Review Name!</Text>
-        <TextInput style={styles.input} value ={title} onChangeText={(text) => setTitle(text)}/>
-
-        <Text style={styles.label}>Enter Your Review!</Text>
-        <TextInput style={styles.input}   value ={review} onChangeText={(text) => setReview(text)}/>
-
-
-        <TouchableOpacity onPress ={() =>
-        {
-            addReview(Math.floor(Math.random() * 9999990),roomNum,title,review);
-            props.navigation.navigate("RoomDetails");
-        }}>
-            <Text style={styles.reviewButton}>Add Review!</Text>
-        </TouchableOpacity>
+        <Text>dwadaw</Text>
+    
     </View>
 
 
@@ -64,4 +51,4 @@ label:
 
 
 })
-export default CreateReview;
+export default ReviewEditScreen;

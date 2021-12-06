@@ -7,10 +7,8 @@ const roomReducer = (state, action) => {
             return action.payload;
         case 'add_room':
             return [...state, { 
-                    id: Math.floor(Math.random() * 9999990), 
+                    id: Math.floor(Math.random() * 999999), 
                     roomNum: action.payload.roomNum,
-                    hasComputers: action.payload.hasComputers,
-                    reviews: action.payload.reviews
                 }
             ]
         case 'update_room':
@@ -21,29 +19,11 @@ const roomReducer = (state, action) => {
                 else{
                     return room;
                 }
-                
             })
-            case 'add_review':
-                return [...state, { 
-                    id: Math.floor(Math.random() * 9999990), 
-                    roomNum: action.payload.roomNum,
-                    hasComputers: action.payload.hasComputers,
-                    
-                }
-            ]
-            case 'delete_review':
-                return state.filter((reviewPost) =>
-                {
-                    return reviewPost.id !== action.payload
-                });
-
         default:
             return state;
     }
 }
-
-
-
 
 const getRooms= dispatch => {
     return async () => {
@@ -63,27 +43,29 @@ const getRooms= dispatch => {
 }
 
 const addRooms = (dispatch) => {
-    return (roomNum, hasComputers) => {
-        dispatch({ type: 'add_room', payload: {roomNum, hasComputers} })
+    return (roomNum) => {
+        
+        
+        dispatch({ type: 'add_room', payload: { roomNum: roomNum } })
+       /*
+        if(callback)
+        {
+            callback();
+        }
+        */
     }
 }
 
-const addReview = (dispatch) => {
-    return (title, review) => {
-
-            dispatch({ type:'add_review', payload:{title,  review}});
-    }
-}
-
-const deleteReview = (dispatch) =>
-{
+const deleteHero = (dispatch) => {
+    
     return (id) =>
     {
-        dispatch({type: 'delete_review', payload: id})
+        dispatch({ type: 'delete_hero', payload: id  })
     }
+    
 }
 
-const updateRoom = (dispatch) => {
+const updateRoom= (dispatch) => {
     
     return (roomNum) =>{
     dispatch({type: 'update_room', payload: {roomNum} })
@@ -95,7 +77,7 @@ const updateRoom = (dispatch) => {
 
 }
 
-export const {Context, Provider} = createDataContext(roomReducer,
-                                    {addRooms: addRooms, deleteReview:deleteReview}, 
+export const {Context, Provider} = createDataContext(roomReducer, 
+                                    {addRooms}, 
                                     [ ]
                                 );

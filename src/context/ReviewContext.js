@@ -6,12 +6,21 @@ const roomReducer = (state, action) => {
 
          case 'add_review':
             return [...state, { 
-                    id: Math.floor(Math.random() * 999999), 
+                    id: action.payload.id,
+                    room: action.payload.room, 
                     title: action.payload.title,
-                    room: action.payload.room,
-                    content: action.payload.content,
+                    review: action.payload.review
                 }
             ]
+            case 'edit_review':
+            return state.map((review) => {
+                if (review.id === action.payload.id) {
+                    return action.payload
+                 }
+                else{
+                    return review;
+                }
+            })
         case 'delete_review':
             return state.filter((reviewPost) =>
             {
@@ -23,17 +32,24 @@ const roomReducer = (state, action) => {
 }
 
 
-const addReviewPost = (dispatch) =>
+const addReview = (dispatch) =>
 {
-    return (title, room, content) =>
+    return (id,room,title,review) =>
     {
     
-            dispatch({ type:'add_review', payload:{title: title,  room: room, content: content}});
+            dispatch({ type:'add_review', payload:{id,room,title,review}});
         
     }
 }
 
-const deleteReviewPost = (dispatch) =>
+const editReview = (dispatch) => {
+    return (id,room,title,review) => {
+            dispatch({ type:'edit_review', payload:{id,room,title,review}});
+    }
+}
+
+
+const deleteReview = (dispatch) =>
 {
     return (id) =>
     {
@@ -44,6 +60,6 @@ const deleteReviewPost = (dispatch) =>
 
 
 export const {Context, Provider} = createDataContext(roomReducer, 
-                                    {addReviewPost:addReviewPost, deleteReviewPost:deleteReviewPost}, 
+                                    {addReview:addReview, deleteReview:deleteReview,editReview:editReview}, 
                                     [ ]
                                 );

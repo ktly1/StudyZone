@@ -1,18 +1,16 @@
 import React, {useContext} from 'react';
 import {StyleSheet, View, Text, Button, FlatList, TouchableOpacity} from 'react-native';
-import {Context} from "../context/RoomContext";
-
+import { Context } from "../context/RoomContext";
 
 const Room = (props) =>
 {
-    const {addRooms,state} = useContext(Context);
+    const {addRooms, state} = useContext(Context);
+
     var roomList = [ 
         {roomNum: 188, hasComputers:'N'}, 
         {roomNum:140 , hasComputers:'Y'}, 
         {roomNum:121, hasComputers:'N'}, 
         {roomNum:132, hasComputers:'Y'}
-    
-    
     ];
 
 
@@ -27,21 +25,23 @@ const Room = (props) =>
                     for (let i = 0; i < roomList.length; i++)
                     {
                         addRooms(roomList[i].roomNum, roomList[i].hasComputers);
-                
+                           
                     }
                 }
             }
         }>
             <Text style={styles.roomHeading}>View Rooms!</Text>
+
         </TouchableOpacity>
 
         <View style = {styles.roomContainer}>
+
             <FlatList
                 data = {state}
                 keyExtractor={(room) => {return room.id}}
                 renderItem={({item}) =>
                 {
-                    return <TouchableOpacity style={styles.roomButton} onPress = { () => {props.navigation.navigate("RoomDetails", {id: item.id})}}>
+                    return <TouchableOpacity style={styles.roomButton} onPress = { () => {props.navigation.navigate("RoomDetails", {id: item.id,room: item.roomNum, hasComputers: item.hasComputers})}}>
                         
                         
                         <Text style= {styles.roomText}> Room Number:{item.roomNum} </Text>
@@ -90,4 +90,3 @@ const styles = StyleSheet.create
 })
 
 export default Room;
-

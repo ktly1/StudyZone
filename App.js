@@ -4,20 +4,18 @@ import React from "react";
 import HomeScreen from "./src/screens/HomeScreen";
 import Rooms from "./src/screens/Rooms";
 import RoomDetails from "./src/screens/RoomDetails";
-import ReviewList from "./src/screens/ReviewList";
-import ReviewDetails from "./src/screens/ReviewDetails";
 import CreateReview from "./src/screens/CreateReview";
-import {Provider as RoomProvider } from "./src/context/RoomContext";
-
+import Edit from "./src/screens/Edit";
+import { Provider as RoomProvider } from "./src/context/RoomContext";
+import { Provider as ReviewProvider } from "./src/context/ReviewContext";
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     Rooms: Rooms,
+    Edit: Edit,
     RoomDetails: RoomDetails,
-    ReviewList: ReviewList,
-    ReviewDetails: ReviewDetails,
-    CreateReview: CreateReview,
+    CreateReview: CreateReview
 
   },
 
@@ -35,9 +33,8 @@ const App = createAppContainer(navigator);
 export default () =>
 {
   return <RoomProvider>
+    <ReviewProvider>
     <App/>
+    </ReviewProvider>
   </RoomProvider>
 }
-
-
-

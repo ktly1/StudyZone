@@ -1,53 +1,39 @@
-import React, {useContext} from 'react'
-import {View, Text, StyleSheet, FlatList, Button} from 'react-native'
+import React, {useContext, useState} from 'react'
+import {View, Text, StyleSheet, FlatList, Button, TextInput} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import {Context as RoomContext} from "../context/RoomContext";
+import {Context} from '../context/ReviewContext';
 import {Feather} from '@expo/vector-icons'
 
 const ReviewList = (props) =>
 {
 
-    const {rev, deleteReviewPost} = useContext(RoomContext)
+    const {addReview, deleteReview, state} = useContext(Context)
+    const [text, setText] = useState("");
+    const roomNum = props.navigation.getParam("room")
+
 
     return <View>
 
 
-        <Text style= {styles.heading}> Reviews! </Text>
-
+        <Text style= {styles.heading}> Reviews for room {roomNum} </Text>
         
-        <FlatList
-            data = {rev}
-            keyExtractor = {(reviewPost) => {return reviewPost.title}}
-            renderItem={({item}) =>
-        {
-            return <TouchableOpacity onPress = {() => {props.navigation.navigate("ReviewDetails", {id:item.id})}}>
-            
-                <View style ={styles.row}> 
-                    <Text styles ={styles.label}>Name: </Text>
-                    <Text styles={styles.roomText}> {item.title}</Text>
-
-                    <Text styles ={styles.label}>Review On Room: </Text>
-                    <Text>{item.room}</Text>
-                    
-
-
-                    <TouchableOpacity onPress={()=> {deleteReviewPost(item.id)}}>
-                        <Feather name = "trash" style = {styles.icon}/>
-                    </TouchableOpacity>
-
-                
-
-                </View>
-            </TouchableOpacity>
-        }} 
-        
-        
+        <TextInput
+            placeholder="type here"
+            onChangeText={text => setText(text)}
+            defaultValue={text}
         />
+        
+        
+       <TouchableOpacity onPress={() => addRoom(roomNum,text)}>
+            <Text>click here to submit review</Text>
+       </TouchableOpacity>
+
 
 
     </View>
 
 }
+
 
 ReviewList.navigationOptions = (props) =>
 {
@@ -66,7 +52,6 @@ ReviewList.navigationOptions = (props) =>
 const styles = StyleSheet.create({
     heading:
     {
-        alignSelf
     },
     row:
     {

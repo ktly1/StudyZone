@@ -1,32 +1,56 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, View, Text, Button, FlatList, TextInput} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { set } from 'react-native-reanimated';
-import {Context} from "../context/RoomContext";
+import {Context} from "../context/ReviewContext";
 
 
 const RoomDetails = (props) =>
 {
-    
         const {state} = useContext(Context);
+        const roomNum = props.navigation.getParam("room");
         const roomID = props.navigation.getParam("id");
-        const room = state.find((room) => 
-        {
-            return roomID === room.id; 
-        
-        })
-        
+
+         const review = state.find((review) => 
+         {
+             return roomID === review.id;
+         })
+         
 
         return <View> 
-            <View>
-                <Text style={styles.roomName}> Room Num {room.roomNum}</Text>
+        
+            <Text style={styles.roomName}>  Room Num {roomNum}  {"\n"}
+                                             </Text>
+            {/* {reviews === 0 ? 
+                            <Text>No reviews found on this room!</Text>
+                                :
+                            <Text>{review.title}</Text>
+            } */}
 
-            </View>
+            <FlatList
+                data = {state}
+                keyExtractor={(review) => {return review.id}}
+                renderItem={({item}) =>
+                {
+                    if(roomNum === item.room){
+                        return <TouchableOpacity onPress = { () => {props.navigation.navigate("Edit", {room: item.room,id: item.id})}}>  
+                        <Text>      Title of review:{item.title} {"\n"}
+                                    the review: {item.review} {"\n"}
+                                    the ID: {item.id}
+                                </Text>
+                        </TouchableOpacity>
+                    }
+                }
+            } 
+            />
 
 
-            <TouchableOpacity style={styles.reviewButton} onPress = {() => props.navigation.navigate("ReviewList")}>
-                <Text> Click here to make or look at Reviews!</Text>
+            <TouchableOpacity style={styles.reviewButton} onPress = { () => {props.navigation.navigate("CreateReview", {room: roomNum,id: roomID})}}>
+                <Text> Click here to add your review!</Text>
+                
             </TouchableOpacity>
+
+
         </View>
     
 }
@@ -51,4 +75,3 @@ const styles = StyleSheet.create
 })
 
 export default RoomDetails;
-
