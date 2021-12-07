@@ -2,20 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet,TouchableOpacity, Image} from 'react-native';
 
 
-const HomeScreen = (props) =>{
+const AboutScreen = (props) =>
+{
+    
 
-    return <View style={styles.background}>
-    <Image style={imgStyles} source={require('../../assets/logo_smol.jpg')} />
-
-    <TouchableOpacity style={styles.buttonContainer} onPress={function(){props.navigation.navigate("Rooms")}}>
-      <Text style = {styles.nextPage}>Find A Study Room</Text> 
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.aboutContainer} onPress={function(){props.navigation.navigate("About")}}>
-    <Image style={styles.aboutImg} source={require('../../assets/about.png')} />
-      <Text style={styles.aboutText}>About Us</Text> 
-    </TouchableOpacity>
-
+    return <View>
+    
+    <Text style={styles.headText}> The Native Power Rangers </Text>
+    <Image style={styles.imgStyles} source={require('../../assets/aboutus.png')} />
+    <Text style={styles.headText}> About Us </Text>
+    <Text> (left to right) </Text>
+    <Text style={styles.names}> Courtney Harris </Text>
+    <Text style={styles.names}> Matt Heaton </Text>
+    <Text style={styles.names}> Phi Phan </Text>
+    <Text style={styles.names}> Kevin Ly</Text>
     <Text style={styles.footing}>Mobile App Dev Fall 2021</Text>
     </View>
 }
@@ -56,6 +56,20 @@ const styles = StyleSheet.create
 
     background:{
       backgroundColor: "white"
+    },
+    headText:
+    {
+        alignSelf: 'center',
+        fontSize: 30,
+        marginTop: 10,
+    },
+    imgStyles: {
+        alignSelf: 'center',
+        width: 420,
+        height: 300
+    },
+    names: {
+        fontSize: 30
     }
 
 });
@@ -69,5 +83,4 @@ const imgStyles = StyleSheet.create
 
 });
 
-export default HomeScreen;
-
+export default AboutScreen;
