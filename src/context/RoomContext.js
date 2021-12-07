@@ -9,8 +9,17 @@ const roomReducer = (state, action) => {
             return [...state, { 
                     id: Math.floor(Math.random() * 9999990), 
                     roomNum: action.payload.roomNum,
+                    nineAm: action.payload.nineAm,
+                    tenAm: action.payload.tenAm,
+                    elevenAm: action.payload.elevenAm,
+                    twelvePm: action.payload.twelvePm,
+                    onePm: action.payload.onePm,
+                    twoPm: action.payload.twoPm,
+                    threePm: action.payload.threePm,
+                    fourPm: action.payload.fourPm,
+                    fivePm: action.payload.fivePm,
                     hasComputers: action.payload.hasComputers,
-                    reviews: action.payload.reviews
+                    roomOccupancy: action.payload.roomOccupancy
                 }
             ]
         case 'update_room':
@@ -23,14 +32,6 @@ const roomReducer = (state, action) => {
                 }
                 
             })
-            case 'add_review':
-                return [...state, { 
-                    id: Math.floor(Math.random() * 9999990), 
-                    roomNum: action.payload.roomNum,
-                    hasComputers: action.payload.hasComputers,
-                    
-                }
-            ]
             case 'delete_review':
                 return state.filter((reviewPost) =>
                 {
@@ -63,8 +64,9 @@ const getRooms= dispatch => {
 }
 
 const addRooms = (dispatch) => {
-    return (roomNum, hasComputers) => {
-        dispatch({ type: 'add_room', payload: {roomNum, hasComputers} })
+    return (roomNum,nineAm,tenAm,elevenAm,twelvePm,onePm,twoPm,threePm,fourPm,fivePm, hasComputers,roomOccupancy) => {
+        dispatch({ type: 'add_room', payload: {roomNum, nineAm, tenAm, elevenAm, twelvePm, onePm, twoPm, threePm,
+            fourPm,fivePm, hasComputers,roomOccupancy} })
     }
 }
 

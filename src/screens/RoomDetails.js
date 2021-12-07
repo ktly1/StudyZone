@@ -21,11 +21,6 @@ const RoomDetails = (props) =>
         
             <Text style={styles.roomName}>  Room Num {roomNum}  {"\n"}
                                              </Text>
-            {/* {reviews === 0 ? 
-                            <Text>No reviews found on this room!</Text>
-                                :
-                            <Text>{review.title}</Text>
-            } */}
 
             <FlatList
                 data = {state}
