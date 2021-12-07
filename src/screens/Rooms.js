@@ -17,7 +17,7 @@ const SHOW_AVAILABLE_ROOMS = "SHOWAVAILABLEROOMS";
 const SHOW_UNAVAILABLE_ROOMS = "SHOWUNAVAILABLEROOMS";
 const SHOW_TIME_ROOMS = "SHOWTIMEROOMS";
 const SHOW_NINE_ROOMS = "SHOWNINEROOMS";
-const SHOW_TEN_ROOMS = "SHOWNINEROOMS";
+const SHOW_TEN_ROOMS = "SHOWTENROOMS";
 const SHOW_ELEVEN_ROOMS = "SHOWELEVENROOMS";
 const SHOW_TWELVE_ROOMS = "SHOWTWELVEROOMS";
 const SHOW_ONE_ROOMS = "SHOWONEROOMS";
@@ -50,13 +50,15 @@ const Room = (props) => {
         
     whatToDisplay = <View>
 
-        <TouchableOpacity onPress = {() => {setRoomState(SHOW_FILTER_ROOMS)}}>
+        <TouchableOpacity   onPress = {() => {setRoomState(SHOW_FILTER_ROOMS)}}>
+            <View style= {styles.searchButton} >
             <Feather name = "search" size={30}></Feather>
+            <Text style={styles.searchText} >Search By</Text>
+            </View>
         </TouchableOpacity>
+    
         
-        <Text style={styles.roomText}> Rooms </Text>
-        
-        <TouchableOpacity onPress={() =>
+        <TouchableOpacity style={styles.search} onPress={() =>
             {
                 if(state.length == 0)
                 {
@@ -70,7 +72,7 @@ const Room = (props) => {
                 }
             }
         }>
-            <Text style={styles.roomHeading}>View Rooms!</Text>
+            <Text style={styles.roomHeading}>Show All Rooms!</Text>
 
         </TouchableOpacity>
 
@@ -109,7 +111,7 @@ const Room = (props) => {
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
 
-         <Text style={styles.roomText}> Room</Text>
+         <Text style={styles.roomText}> Unavailable Rooms! D: </Text>
  
          <View style = {styles.roomContainer}>
  
@@ -135,10 +137,7 @@ const Room = (props) => {
              />
  
          </View>
-             <Button 
-                 title="Testing"
-                 onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-             />
+             
  
          </View>
     break;
@@ -153,7 +152,7 @@ const Room = (props) => {
         </TouchableOpacity>
 
 
-        <Text style={styles.roomText}> Room</Text>
+        <Text style={styles.roomText}> Available Rooms! :D </Text>
 
         <View style = {styles.roomContainer}>
 
@@ -179,10 +178,6 @@ const Room = (props) => {
             />
 
         </View>
-            <Button 
-                title="Testing"
-                onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-            />
 
         </View>
         break;
@@ -238,9 +233,13 @@ const Room = (props) => {
          
         whatToDisplay = <View>
 
-            <TouchableOpacity onPress = { () => {setRoomState(SHOW_FILTER_ROOMS)}}> 
-                <Text style={styles.backButton}> {myIcon} </Text>
-            </TouchableOpacity>
+            <View style={styles.timeContainer}>
+                <TouchableOpacity onPress = { () => {setRoomState(SHOW_FILTER_ROOMS)}}> 
+                    <Text style={styles.backButton}> {myIcon} </Text>
+                </TouchableOpacity>
+
+                <Text style = {styles.timeHeading}> ~Pick An Hour To Study~ </Text>
+            </View>
 
             <TouchableOpacity onPress={() => {setRoomState(SHOW_NINE_ROOMS)}}>
                     <Text style={styles.roomHeadingTime}>{myClock} 9 am</Text>
@@ -286,14 +285,16 @@ const Room = (props) => {
         case SHOW_NINE_ROOMS:
             whatToDisplay = <View>
 
+            <View style ={styles.header}>
             <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
+            </View>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}> Rooms Open: 9-9am</Text>
             
             <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-            <Text>All rooms{"\n"}</Text>
+
             </TouchableOpacity>
     
             <View style = {styles.roomContainer}>
@@ -322,10 +323,7 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
+
     
             </View>
 
@@ -335,16 +333,15 @@ const Room = (props) => {
         case SHOW_TEN_ROOMS:
             whatToDisplay = <View>
 
-        
+    <View style ={styles.header}>
         <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}>Rooms Open 10-10:59am</Text>
             
-            <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-            <Text>All rooms{"\n"}</Text>
-            </TouchableOpacity>
+        
+        </View>
     
             <View style = {styles.roomContainer}>
 
@@ -372,10 +369,7 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
+                
     
             </View>
 
@@ -385,16 +379,14 @@ const Room = (props) => {
     case SHOW_ELEVEN_ROOMS:
     whatToDisplay = <View>
     
-    
+    <View style ={styles.header}>
     <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
-    <Text style={styles.roomText}> Room</Text>
+    <Text style={styles.roomText}> Room Open: 11-11:59am</Text>
     
-    <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-    <Text>All rooms{"\n"}</Text>
-    </TouchableOpacity>
-
+    
+</View>
     <View style = {styles.roomContainer}>
 
         <FlatList
@@ -422,10 +414,7 @@ const Room = (props) => {
         />
 
     </View>
-        <Button 
-            title="Testing"
-            onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-        />
+        
 
     </View>
     break;
@@ -434,16 +423,16 @@ const Room = (props) => {
     case SHOW_TWELVE_ROOMS:
         whatToDisplay = <View>
 
-       
+<View style ={styles.header}>
         <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
         </TouchableOpacity>
     
-        <Text style={styles.roomText}> Room</Text>
+    
+        <Text style={styles.roomText}> Rooms Open: 12-12:59pm</Text>
+    </View>
         
-        <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-        <Text>All rooms{"\n"}</Text>
-        </TouchableOpacity>
+        
 
         <View style = {styles.roomContainer}>
 
@@ -472,10 +461,7 @@ const Room = (props) => {
             />
 
         </View>
-            <Button 
-                title="Testing"
-                onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-            />
+            
 
         </View>
         break;
@@ -484,16 +470,15 @@ const Room = (props) => {
         case SHOW_ONE_ROOMS:
             
             whatToDisplay = <View>
-            
+            <View style ={styles.header}>
             <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}> Rooms Open: 1-1:59pm</Text>
+
+            </View>
             
-            <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-            <Text>All rooms{"\n"}</Text>
-            </TouchableOpacity>
     
             <View style = {styles.roomContainer}>
 
@@ -521,10 +506,7 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
+
     
             </View>
             break;
@@ -532,17 +514,15 @@ const Room = (props) => {
             // 2 AM ROOMS
             case SHOW_TWO_ROOMS:
                 whatToDisplay = <View>
-                
+            
+            <View style ={styles.header}>
             <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
             
-                <Text style={styles.roomText}> Room</Text>
-                
-                <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-                <Text>All rooms{"\n"}</Text>
-                </TouchableOpacity>
-        
+                <Text style={styles.roomText}> Rooms Open: 2-2:59pm</Text>
+            </View>
+
                 <View style = {styles.roomContainer}>
     
                     <FlatList
@@ -570,10 +550,7 @@ const Room = (props) => {
                     />
         
                 </View>
-                    <Button 
-                        title="Testing"
-                        onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                    />
+                
         
                 </View>
         break;
@@ -582,16 +559,14 @@ const Room = (props) => {
         case SHOW_THREE_ROOMS:
             whatToDisplay = <View>
 
-        
+<View style ={styles.header}>
 <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}> Rooms Open: 3-3:59pm</Text>
             
-            <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-            <Text>All rooms{"\n"}</Text>
-            </TouchableOpacity>
+           </View>
     
             <View style = {styles.roomContainer}>
 
@@ -620,27 +595,22 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
-    
+                
             </View>
         break;
 
         // 10 AM ROOMS
         case SHOW_FOUR_ROOMS:
             whatToDisplay = <View>
+                <View style ={styles.header}>
             
             <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}> Rooms Open: 4-4:59pm</Text>
+            </View>
             
-            <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-            <Text>All rooms{"\n"}</Text>
-            </TouchableOpacity>
     
             <View style = {styles.roomContainer}>
 
@@ -669,10 +639,7 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
+               
     
             </View>    
         break;
@@ -681,16 +648,15 @@ const Room = (props) => {
         case SHOW_FIVE_ROOMS:
             whatToDisplay = <View>
 
+        <View style ={styles.header}>
             
             <TouchableOpacity onPress = { () => {setRoomState(SHOW_TIME_ROOMS)}}> 
                 <Text style={styles.backButton}> {myIcon} </Text>
             </TouchableOpacity>
         
-            <Text style={styles.roomText}> Room</Text>
+            <Text style={styles.roomText}> Rooms Open: 5-5:59pm</Text>
+            </View>
             
-            <TouchableOpacity onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}>
-                <Text>All rooms{"\n"}</Text>
-            </TouchableOpacity>
     
             <View style = {styles.roomContainer}>
 
@@ -719,11 +685,7 @@ const Room = (props) => {
                 />
     
             </View>
-                <Button 
-                    title="Testing"
-                    onPress = {() => {setRoomState(SHOW_ALL_ROOMS)}}
-                />
-    
+        
             </View>
     }
     return whatToDisplay;
@@ -754,9 +716,11 @@ const styles = StyleSheet.create
         alignSelf: 'center',
         borderWidth:3,
         padding:20,
-        borderRadius: 10,
+    
         color: '#FFFFFF',
-        backgroundColor: '#0DA2FF',
+        backgroundColor: "#005CA6",
+        borderColor:'darkblue',
+       
 
     },
     roomText:
@@ -817,6 +781,33 @@ const styles = StyleSheet.create
        padding:50,
         justifyContent: 'space-between',
     },
+    searchButton:
+    {
+        flexDirection: 'row',
+        
+
+    },
+    searchText:
+    {
+        fontSize: 25,
+    },
+    search:
+    {
+        marginTop: 10,
+
+    },
+    timeContainer:
+    {
+        flexDirection:'row',
+
+    },
+    timeHeading:
+    {
+        alignSelf: 'center',
+        fontSize: 30,
+    
+    }
+
     
 })
 

@@ -12,10 +12,10 @@ const AboutScreen = (props) =>
     <Image style={styles.imgStyles} source={require('../../assets/aboutus.png')} />
     <Text style={styles.headText}> About Us </Text>
     <Text> (left to right) </Text>
-    <Text style={styles.names}> Courtney Harris </Text>
-    <Text style={styles.names}> Matt Heaton </Text>
-    <Text style={styles.names}> Phi Phan </Text>
-    <Text style={styles.names}> Kevin Ly</Text>
+    <Text style={styles.names}> Courtney Harris: Junior </Text>
+    <Text style={styles.names}> Matt Heaton: Senior </Text>
+    <Text style={styles.names}> Phi Phan: Senior</Text>
+    <Text style={styles.names}> Kevin Ly: Senior</Text>
     <Text style={styles.footing}>Mobile App Dev Fall 2021</Text>
     </View>
 }

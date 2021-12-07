@@ -74,7 +74,7 @@ const RoomDetails = (props) =>
                             if(roomNum === item.room){
                                 return <TouchableOpacity onPress = { () => {props.navigation.navigate("Edit", {room: item.room,id: item.id})}}>  
                                 <Text style = {{fontSize:15,}}>      
-                                    Title: {item.title} {"\n"}
+                                    Name: {item.title} {"\n"}
                                     Review: {item.review} {"\n"}
                                 </Text>
                                 </TouchableOpacity>
